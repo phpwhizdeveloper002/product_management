@@ -3,14 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     use HasFactory;
+    use Notifiable;
     use SoftDeletes;
+
+    protected $guard = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -21,9 +26,6 @@ class Admin extends Model
         'name',
         'email',
         'password',
-        'phone',
-        'country',
-        'city'
     ];
 
     /**
